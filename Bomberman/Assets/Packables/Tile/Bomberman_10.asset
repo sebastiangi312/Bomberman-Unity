@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SolidBlock
+  m_Name: Bomberman_10
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: fc2f4d5ffafaf4744a5732f8d1e85a29, type: 3}
+  m_Sprite: {fileID: -4205259934154195521, guid: 334e5dbd292325a40ab8f1bcb3751e08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -33,4 +33,4 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 2
+  m_ColliderType: 1
