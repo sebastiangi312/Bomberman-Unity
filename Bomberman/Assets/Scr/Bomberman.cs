@@ -6,7 +6,7 @@ public class Bomberman : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private float speed = 2;
+    private float speed = 1;
     [SerializeField]
 
     private Vector2 _velocity;
@@ -19,22 +19,36 @@ public class Bomberman : MonoBehaviour
 
     [SerializeField]
     private Transform _bombPoint;
+    
+    [SerializeField]
+    private Animator _animator;
+    
     void Start()
     {
-        
+        // _animator = GetComponents<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-
+        
+        if (vertical != 0.0f)
+        {
+            if (vertical < 0) _animator.SetTrigger("IsMovDown");
+            else if (vertical > 0) _animator.SetTrigger("IsMovUp");
+        } 
+        else if (horizontal != 0.0f)
+        {
+            if (horizontal < 0) _animator.SetTrigger("IsMovLeft");
+            else if (horizontal > 0) _animator.SetTrigger("IsMovRight");
+        }
+        _animator.SetBool("IsNotMoving", horizontal == 0.0f && vertical == 0.0f);
+        
         Vector2 _dir  = new Vector2(horizontal, vertical);
         _dir.Normalize();
         _velocity = speed * _dir;
-        
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -47,9 +61,7 @@ public class Bomberman : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-     
-        _rb.velocity = _velocity;
-       
+    {   
+        _rb.velocity = _velocity;  
     }
 }
