@@ -215,6 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 322633361}
   - component: {fileID: 322633362}
+  - component: {fileID: 322633363}
   m_Layer: 0
   m_Name: EnemyAnimations
   m_TagString: Untagged
@@ -230,8 +231,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322633360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.053, y: -0.003, z: 0}
+  m_LocalScale: {x: 1.5713841, y: 1.747366, z: 1}
   m_Children: []
   m_Father: {fileID: 2023399719}
   m_RootOrder: 0
@@ -287,6 +288,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &322633363
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322633360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f649f66116165b1439acef5b87c19d2f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &395910849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2909,8 +2929,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.017149776}
-  m_Size: {x: 0.5, y: 0.59983915}
+  m_Offset: {x: 0.041434586, y: -0.018365532}
+  m_Size: {x: 0.7841227, y: 0.8729109}
   m_Direction: 0
 --- !u!50 &2023399718
 Rigidbody2D:
@@ -2941,7 +2961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023399716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.482, y: 0.504, z: -1.0400814}
+  m_LocalPosition: {x: 0.458, y: 2.571, z: -1.0400814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 322633361}
@@ -3018,9 +3038,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2117246204}
-  - component: {fileID: 2117246203}
   - component: {fileID: 2117246206}
   - component: {fileID: 2117246205}
+  - component: {fileID: 2117246202}
   m_Layer: 0
   m_Name: Bomberman
   m_TagString: Untagged
@@ -3028,7 +3048,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2117246203
+--- !u!114 &2117246202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3037,7 +3057,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117246201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fa83fa2d8f15446aeb8f044a6c5436, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ded34be75d8e542bf5efa1731340a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
