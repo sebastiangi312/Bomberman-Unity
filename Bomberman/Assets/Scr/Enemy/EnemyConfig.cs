@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyConfig : MonoBehaviour
+//[Serializable]
+public class EnemyConfig 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public EnemyStateType initialState = EnemyStateType.Idle;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Moving")]
+    public float IdleTime = 1;
+    public float PathfindingRefreshTime = 1;
+    public List<Transform> PathPoints;
+
 }

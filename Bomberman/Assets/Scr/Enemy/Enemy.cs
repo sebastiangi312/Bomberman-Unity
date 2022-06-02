@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Space(20)]
 
-    // Update is called once per frame
+    [SerializeField]
+    private EnemyConfig _enemyConfig;
+    
+    private PathFindingController _pathFindingController;
+    private StateMachineController _stateMachineController;
+    
+    public EnemyConfig EnemyConfig => _enemyConfig;
+    public PathFindingController PathFindingController => _pathFindingController;
+    public StateMachineController StateMachineController => _stateMachineController;
+    
+    public void Start()
+    {
+        _pathFindingController = GetComponent<PathFindingController>();
+        _stateMachineController = new StateMachineController();
+        _stateMachineController.Init(this);      
+    }
+    
     void Update()
     {
-        
+        _stateMachineController.OnUpdate();
     }
 }

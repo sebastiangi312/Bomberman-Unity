@@ -2,17 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyIdleState : MonoBehaviour
+public class EnemyIdleState : IEnemyState
 {
-    // Start is called before the first frame update
-    void Start()
+    private float _moveToPatrolAt = 0;
+    
+    public void OnEnter(Enemy enemy)
     {
+        Debug.Log("Idle: OnEnter");
+        _moveToPatrolAt = Time.time + enemy.EnemyConfig.IdleTime;
+    }
+
+    public void OnUpdate(Enemy enemy)
+    {
+        Debug.Log("Idle: OnUpdate");
+        
+        //After X sec -> To patrol
+        if (Time.time > _moveToPatrolAt)
+        {
+            enemy.StateMachineController.ChangeToState(EnemyStateType.Patrol);
+            return;
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnExit(Enemy enemy)
     {
-        
+        Debug.Log("Idle: OnExit");
     }
 }
