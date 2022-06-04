@@ -19,13 +19,21 @@ public class Bomberman : MonoBehaviour
 
     [SerializeField]
     private Transform _bombPoint;
-    
+
     [SerializeField]
     private Animator _animator;
-    
+
+    [SerializeField]
+    private float timeSpawnBomb = 1f;
+    private float timeSpawnBombAux;
+
+
+
     void Start()
     {
         // _animator = GetComponents<Animator>();
+        timeSpawnBombAux = timeSpawnBomb;
+        timeSpawnBomb = 0f;
     }
 
     // Update is called once per frame
@@ -33,35 +41,42 @@ public class Bomberman : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        
+
         if (vertical != 0.0f)
         {
             if (vertical < 0) _animator.SetTrigger("IsMovDown");
             else if (vertical > 0) _animator.SetTrigger("IsMovUp");
-        } 
+        }
         else if (horizontal != 0.0f)
         {
             if (horizontal < 0) _animator.SetTrigger("IsMovLeft");
             else if (horizontal > 0) _animator.SetTrigger("IsMovRight");
         }
         _animator.SetBool("IsNotMoving", horizontal == 0.0f && vertical == 0.0f);
-        
-        Vector2 _dir  = new Vector2(horizontal, vertical);
+
+        Vector2 _dir = new Vector2(horizontal, vertical);
         _dir.Normalize();
         _velocity = speed * _dir;
-
+        timeSpawnBomb -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
-            
-            GameObject projectile = Instantiate(_bombPrefab);
-            projectile.transform.position = _bombPoint.position;
-            projectile.transform.rotation = _bombPoint.rotation;
-            
+
+            if (timeSpawnBomb <= 0)
+            {
+                GameObject projectile = Instantiate(_bombPrefab);
+                projectile.transform.position = _bombPoint.position;
+                projectile.transform.rotation = _bombPoint.rotation;
+                timeSpawnBomb = timeSpawnBombAux;
+            }
+
+
         }
     }
 
+
+
     private void FixedUpdate()
-    {   
-        _rb.velocity = _velocity;  
+    {
+        _rb.velocity = _velocity;
     }
 }

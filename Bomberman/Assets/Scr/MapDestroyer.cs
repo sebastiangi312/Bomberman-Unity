@@ -49,6 +49,9 @@ public class MapDestroyer : MonoBehaviour
             Debug.Log("No Solid");
             tilemap.SetTile(cell,null);
         }
+        else{
+            tilemap.SetTile(cell,null);
+        }
 
         Vector3 pos = tilemap.GetCellCenterWorld(cell);
         Instantiate(explosionPrefab,pos,Quaternion.identity);
