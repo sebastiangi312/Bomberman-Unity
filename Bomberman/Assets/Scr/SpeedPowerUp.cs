@@ -40,7 +40,6 @@ namespace Scr
         {
             if (other.gameObject.tag == "Player")
             {
-                Debug.Log("COLISONO");
                 _isPicked = true;
                 var vel = player.GetComponent<Bomberman>().GetSpeed();
                 player.GetComponent<Bomberman>().SetSpeed(vel+velBuff);
