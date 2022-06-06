@@ -27,6 +27,11 @@ public class Bomberman : MonoBehaviour
     private float timeSpawnBomb = 1f;
     private float timeSpawnBombAux;
 
+    private bool powerBomb;
+    [SerializeField]
+    private float timePowerBomb = 10f;
+    private float auxTimePowerBomb;
+
 
 
     void Start()
@@ -34,6 +39,8 @@ public class Bomberman : MonoBehaviour
         // _animator = GetComponents<Animator>();
         timeSpawnBombAux = timeSpawnBomb;
         timeSpawnBomb = 0f;
+        powerBomb = false;
+        auxTimePowerBomb = timePowerBomb;
     }
 
     // Update is called once per frame
@@ -71,6 +78,14 @@ public class Bomberman : MonoBehaviour
 
 
         }
+        if (powerBomb){
+            timePowerBomb -= Time.deltaTime;
+            if (timePowerBomb<0){
+                timePowerBomb = 0f;
+                powerBomb = false;
+            }
+        }
+        
     }
 
 
@@ -79,4 +94,16 @@ public class Bomberman : MonoBehaviour
     {
         _rb.velocity = _velocity;
     }
+
+    public void activaPowerUpBomb(){
+        powerBomb = true;
+        timePowerBomb = auxTimePowerBomb;
+        Debug.Log(powerBomb);
+        return;
+    }
+
+    public bool getPowerBomb(){
+        return powerBomb;
+    }
+
 }
