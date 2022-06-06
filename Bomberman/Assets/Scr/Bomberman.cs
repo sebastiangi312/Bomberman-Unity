@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Bomberman : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private float speed = 1;
+    private float _speed = 1;
     [SerializeField]
 
     private Vector2 _velocity;
-
+    
+    
     [SerializeField]
     private Rigidbody2D _rb;
 
@@ -63,7 +65,7 @@ public class Bomberman : MonoBehaviour
 
         Vector2 _dir = new Vector2(horizontal, vertical);
         _dir.Normalize();
-        _velocity = speed * _dir;
+        _velocity = _speed * _dir;
         timeSpawnBomb -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
@@ -88,8 +90,16 @@ public class Bomberman : MonoBehaviour
         
     }
 
+    public void SetSpeed(float speed)
+    {
+        this._speed = speed;
+    }
 
-
+    public float GetSpeed()
+    {
+        return this._speed;
+    }
+    
     private void FixedUpdate()
     {
         _rb.velocity = _velocity;

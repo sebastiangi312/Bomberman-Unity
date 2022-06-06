@@ -13,7 +13,8 @@ public class MapDestroyer : MonoBehaviour
     private Tile explodableBlock;
     [SerializeField]
     private GameObject explosionPrefab;
-   
+    [SerializeField]
+    private GameObject speedPowerUpPrefab;
 
     public void Explosion(Vector2 worldPos, bool power){
         Vector3Int originCell = tilemap.WorldToCell(worldPos);
@@ -41,9 +42,6 @@ public class MapDestroyer : MonoBehaviour
                 ExplosionCell(originCell+ new Vector3Int(0,-2,0));
             }
         }
-        
-       
-        
     }
 
     public bool ExplosionCell (Vector3Int cell){
@@ -52,6 +50,7 @@ public class MapDestroyer : MonoBehaviour
         Debug.Log(tile + " - " + explodableBlock);
         Debug.Log(tile == explodableBlock);
        
+        Vector3 pos = tilemap.GetCellCenterWorld(cell);
         if (tile == solidBlock){
             Debug.Log("Solid");
             return false;
@@ -62,6 +61,7 @@ public class MapDestroyer : MonoBehaviour
             Vector3 pos = tilemap.GetCellCenterWorld(cell);
             Instantiate(explosionPrefab,pos,Quaternion.identity);
             return false;
+
         }
         else{
             tilemap.SetTile(cell,null);
@@ -69,10 +69,18 @@ public class MapDestroyer : MonoBehaviour
             Instantiate(explosionPrefab,pos,Quaternion.identity);
             return true;
         }
-
-        
+        Instantiate(explosionPrefab, pos, Quaternion.identity);
+        return true;
 
     }
 
-    
+    private void createPowerUp(Vector3Int pos)
+    {
+        float random = Random.value;
+        if (random <= 0.5)
+        {
+            Vector3 newPosi = tilemap.GetCellCenterWorld(pos);
+            Instantiate(speedPowerUpPrefab, newPosi, Quaternion.identity);
+        }
+    }
 }

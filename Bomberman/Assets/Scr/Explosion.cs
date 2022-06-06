@@ -11,6 +11,7 @@ public class Explosion : MonoBehaviour
     
 
     private Collider2D circleCollider;
+    
     void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
