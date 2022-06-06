@@ -205,6 +205,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &229489390 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 766632644625804092, guid: d445dd1412298424897be28872fec04c, type: 3}
+  m_PrefabInstance: {fileID: 766632645564671059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &395910849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,6 +2657,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1470349774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 766632644995397802, guid: d445dd1412298424897be28872fec04c, type: 3}
+  m_PrefabInstance: {fileID: 766632645564671059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1470349776 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 766632644995397805, guid: d445dd1412298424897be28872fec04c, type: 3}
+  m_PrefabInstance: {fileID: 766632645564671059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1470349777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470349774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fa83fa2d8f15446aeb8f044a6c5436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _velocity: {x: 0, y: 0}
+  _rb: {fileID: 1470349776}
+  _bombPrefab: {fileID: 5267628937391067, guid: 3f5a2a3384c4f3848bd8c79522282628, type: 3}
+  _bombPoint: {fileID: 1470349778}
+  _animator: {fileID: 229489390}
+  timeSpawnBomb: 1
+  timePowerBomb: 10
+--- !u!4 &1470349778 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 766632644995397807, guid: d445dd1412298424897be28872fec04c, type: 3}
+  m_PrefabInstance: {fileID: 766632645564671059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2050011478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,6 +2753,8 @@ MonoBehaviour:
   solidBlock: {fileID: 11400000, guid: d6f1964334a59b84b88e2c9e38afeae3, type: 2}
   explodableBlock: {fileID: 11400000, guid: d6d333e52d48615428d287fbae31330d, type: 2}
   explosionPrefab: {fileID: 2190727934905560995, guid: 0982f8c75ca69c44694b6b8f79fa9d16, type: 3}
+  speedPowerUpPrefab: {fileID: 2525609663886696759, guid: 0d64549aac940834b91678b4a23531a6, type: 3}
+  bombPowerUpPrefab: {fileID: 5432790070308568790, guid: dfbd07737bb7fb34ebc6e4b13df4c3bf, type: 3}
 --- !u!1001 &766632645564671059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2776,5 +2818,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.409
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 766632644995397800, guid: d445dd1412298424897be28872fec04c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d445dd1412298424897be28872fec04c, type: 3}
