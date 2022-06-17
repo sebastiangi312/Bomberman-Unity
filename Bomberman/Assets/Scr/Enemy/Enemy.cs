@@ -4,44 +4,47 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Space(20)]
-    
-    private PathFindingController _pathFindingController;
+    [HideInInspector]
+    public bool mustPatrol;
 
-    [SerializeField]
-    private List<Transform> _pathPoints;
+    public Rigidbody2D rb;
 
-    private Vector3 _nextPoint;
-    private int _currentPointIndex = 0;
+    public float walkSpeed;
+
+    public Collider2D bodyCollider;
+
+    public LayerMask groundLayer;
     
     public void Start()
     {
-        _pathFindingController = GetComponent<PathFindingController>();
-        _nextPoint = GetEnemyNextPoint();
-        Debug.Log(_nextPoint);
-        this._pathFindingController.GoTo(_nextPoint);
+        mustPatrol = true;
     }
     
     void Update()
     {
-        float distance = (_nextPoint - transform.position).magnitude;
-
-        if(distance <= 0.01f) 
+        if(mustPatrol)
         {
-            _nextPoint = GetEnemyNextPoint();
-            this._pathFindingController.GoTo(_nextPoint);
+            Patrol();
         }
         
     }
 
-    private Vector3 GetEnemyNextPoint()
+    void Patrol() 
     {
-        if (this._pathPoints == null || this._pathPoints.Count == 0)
+
+        if(bodyCollider.IsTouchingLayers(groundLayer)) 
         {
-            return Vector3.zero;
+            Flip();
         }
-        
-        _currentPointIndex = (_currentPointIndex + 1) % this._pathPoints.Count;
-        return this._pathPoints[_currentPointIndex].position;
+        rb.velocity = new Vector2(walkSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        //rb.velocity = new Vector2(rb.velocity.x, walkSpeed * Time.fixedDeltaTime);
+    }
+
+    void Flip()
+    {
+        mustPatrol = false;
+        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        walkSpeed *= -1;
+        mustPatrol = true;
     }
 }
