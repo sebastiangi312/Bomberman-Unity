@@ -231,8 +231,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322633360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.053, y: -0.003, z: 0}
-  m_LocalScale: {x: 1.5713841, y: 1.747366, z: 1}
+  m_LocalPosition: {x: 0.03, y: -0.016, z: 0}
+  m_LocalScale: {x: 1.6761018, y: 1.8565769, z: 1}
   m_Children: []
   m_Father: {fileID: 2023399719}
   m_RootOrder: 0
@@ -2910,6 +2910,7 @@ GameObject:
   - component: {fileID: 2023399718}
   - component: {fileID: 2023399717}
   - component: {fileID: 2023399720}
+  - component: {fileID: 2023399721}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2930,8 +2931,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.041434586, y: -0.018365532}
-  m_Size: {x: 0.7841227, y: 0.8729109}
+  m_Offset: {x: 0.024237394, y: -0.041277766}
+  m_Size: {x: 0.88925695, y: 0.9239764}
   m_Direction: 0
 --- !u!50 &2023399718
 Rigidbody2D:
@@ -2953,7 +2954,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &2023399719
 Transform:
   m_ObjectHideFlags: 0
@@ -2962,7 +2963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023399716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.458, y: 2.571, z: -1.0400814}
+  m_LocalPosition: {x: 1.372, y: 0.542, z: -1.0400814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 322633361}
@@ -2981,13 +2982,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c50db485e88d74abd48111c4cb25b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
   mustPatrol: 0
-  rb: {fileID: 2023399718}
-  walkSpeed: 5
-  bodyCollider: {fileID: 0}
+  _rb: {fileID: 2023399718}
+  walkSpeed: 20
+  bodyCollider: {fileID: 2023399717}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _animator: {fileID: 322633363}
+--- !u!61 &2023399721
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023399716}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.021410167, y: -0.0422197}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.84811985, y: 0.9246764}
+  m_EdgeRadius: 0
 --- !u!1 &2050011478
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,10 +3106,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117246201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fa83fa2d8f15446aeb8f044a6c5436, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ded34be75d8e542bf5efa1731340a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   _velocity: {x: 0, y: 0}
   _rb: {fileID: 2117246206}
   _bombPrefab: {fileID: 5267628937391067, guid: 3f5a2a3384c4f3848bd8c79522282628, type: 3}
