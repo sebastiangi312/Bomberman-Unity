@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
         vertical = 0.0f;
         horizontal = 1.0f;
         mustPatrol = true;
-        r = true;
+        r = true; // Inicia moviendose a la derecha
         l = false;
         d = false;
         u = false;
@@ -51,25 +51,14 @@ public class Enemy : MonoBehaviour
     void Patrol() 
     {
 
-        if(bodyCollider.IsTouchingLayers(groundLayer)) 
+        if(bodyCollider.IsTouchingLayers(groundLayer))
         {
             Flip();
         }
         
-        Debug.Log(transform.position.x);
         Vector2 _dir  = new Vector2(horizontal, vertical);
         _dir.Normalize();
         _velocity = speed * _dir;
-        
-        //if (r || l)
-        //{
-        //    rb.velocity = new Vector2(walkSpeed * Time.fixedDeltaTime, rb.velocity.y);    
-        //}
-        //else
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.y, walkSpeed * Time.fixedDeltaTime);
-        //}
-        //rb.velocity = new Vector2(rb.velocity.x, walkSpeed * Time.fixedDeltaTime);
     }
     
     private void FixedUpdate()
@@ -79,20 +68,7 @@ public class Enemy : MonoBehaviour
 
     void Flip()
     {
-        /*
-        if (r) Debug.Log("Right: True");
-        else Debug.Log("Right: False");
-        
-        if (l) Debug.Log("Left: True");
-        else Debug.Log("Left: False");
-        
-        if (u) Debug.Log("Up: True");
-        else Debug.Log("Up: False");
-        
-        if (d) Debug.Log("Down: True");
-        else Debug.Log("Down: False");
-        */
-        Vector3 a;
+        Vector3 auxMov;
         Vector3 pos = transform.position;
         mustPatrol = false;
         if (r)
@@ -100,19 +76,8 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovDown");
             horizontal = 0.0f;
             vertical = -1.0f;
-            a = new Vector3(transform.position.x - 0.05f, transform.position.y);
-            transform.position = a;
-            
-            
-            //pos +=  dir.y * speed * Time.deltaTime * transform.up; //X = V * T
-            //pos +=  dir.x * speed * Time.deltaTime * transform.right;
-        
-            //Vector3 movement = speed * Time.deltaTime * dir;
-            //movement = transform.rotation * movement;
-            //pos += movement;
-        
-            //transform.position = pos;
-            
+            auxMov = new Vector3(transform.position.x - 0.05f, transform.position.y);
+            transform.position = auxMov;
             
             r = false;
             d = true;
@@ -122,8 +87,8 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovLeft");
             horizontal = -1.0f;
             vertical = 0.0f;
-            a = new Vector3(transform.position.x, transform.position.y + 0.05f);
-            transform.position = a;
+            auxMov = new Vector3(transform.position.x, transform.position.y + 0.05f);
+            transform.position = auxMov;
             
             d = false;
             l = true;
@@ -133,8 +98,8 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovUp");
             horizontal = 0.0f;
             vertical = 1.0f;
-            a = new Vector3(transform.position.x + 0.05f, transform.position.y);
-            transform.position = a;
+            auxMov = new Vector3(transform.position.x + 0.05f, transform.position.y);
+            transform.position = auxMov;
             
             l = false;
             u = true;
@@ -144,8 +109,8 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovRight");
             horizontal = 1.0f;
             vertical = 0.0f;
-            a = new Vector3(transform.position.x, transform.position.y - 0.05f);
-            transform.position = a;
+            auxMov = new Vector3(transform.position.x, transform.position.y - 0.05f);
+            transform.position = auxMov;
             
             u = false;
             r = true;
