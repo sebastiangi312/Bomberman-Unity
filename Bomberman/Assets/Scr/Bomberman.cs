@@ -11,8 +11,8 @@ public class Bomberman : MonoBehaviour
     [SerializeField]
 
     private Vector2 _velocity;
-    
-    
+
+
     [SerializeField]
     private Rigidbody2D _rb;
 
@@ -33,6 +33,11 @@ public class Bomberman : MonoBehaviour
     [SerializeField]
     private float timePowerBomb = 10f;
     private float auxTimePowerBomb;
+    private AudioManager audioManager;
+
+    private int enemyDestroy;
+
+    private int cantidadEnemy;
 
 
 
@@ -43,11 +48,22 @@ public class Bomberman : MonoBehaviour
         timeSpawnBomb = 0f;
         powerBomb = false;
         auxTimePowerBomb = timePowerBomb;
+        audioManager = FindObjectOfType<AudioManager>();
+        enemyDestroy = 0;
+
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        foreach (GameObject go in allObjects)
+            if (go.tag == "Enemy")
+            {
+                cantidadEnemy++;
+            }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(cantidadEnemy);
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -71,6 +87,7 @@ public class Bomberman : MonoBehaviour
         {
             if (timeSpawnBomb <= 0)
             {
+                audioManager.seleccionAudio(4, 1);
                 GameObject projectile = Instantiate(_bombPrefab);
                 projectile.transform.position = _bombPoint.position;
                 projectile.transform.rotation = _bombPoint.rotation;
@@ -78,14 +95,23 @@ public class Bomberman : MonoBehaviour
             }
 
         }
-        if (powerBomb){
+        if (powerBomb)
+        {
             timePowerBomb -= Time.deltaTime;
-            if (timePowerBomb<0){
+            if (timePowerBomb < 0)
+            {
                 timePowerBomb = 0f;
                 powerBomb = false;
             }
         }
-        
+
+        if (enemyDestroy == cantidadEnemy)
+        {
+            audioManager.seleccionAudio(7, 1);
+            gameObject.SetActive(false);
+            GameManager.Instance.GameOver();
+        }
+
     }
 
     public void SetSpeed(float speed)
@@ -97,21 +123,28 @@ public class Bomberman : MonoBehaviour
     {
         return this._speed;
     }
-    
+
     private void FixedUpdate()
     {
         _rb.velocity = _velocity;
     }
 
-    public void activaPowerUpBomb(){
+    public void activaPowerUpBomb()
+    {
         powerBomb = true;
         timePowerBomb = auxTimePowerBomb;
         Debug.Log(powerBomb);
         return;
     }
 
-    public bool getPowerBomb(){
+    public bool getPowerBomb()
+    {
         return powerBomb;
+    }
+
+    public void enemyDestroyed()
+    {
+        enemyDestroy++;
     }
 
 }

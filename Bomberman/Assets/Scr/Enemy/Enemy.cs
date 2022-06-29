@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float speed = 1;
-    
+
     [HideInInspector]
     public bool mustPatrol;
 
@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Animator _animator;
     private Vector2 _velocity;
+    private AudioManager audioManager;
     private bool r;
     private bool l;
     private bool u;
@@ -38,21 +39,22 @@ public class Enemy : MonoBehaviour
         l = false;
         d = false;
         u = false;
+        audioManager = FindObjectOfType<AudioManager>();
     }
-    
+
     void Update()
     {
-        if(mustPatrol)
+        if (mustPatrol)
         {
             Patrol();
         }
-        
+
     }
 
-    void Patrol() 
+    void Patrol()
     {
 
-        if(bodyCollider.IsTouchingLayers(groundLayer))
+        if (bodyCollider.IsTouchingLayers(groundLayer))
         {
             Debug.Log("Colision");
             Flip();
@@ -62,10 +64,10 @@ public class Enemy : MonoBehaviour
         _velocity = speed * _dir;
         
     }
-    
+
     private void FixedUpdate()
-    {   
-        _rb.velocity = _velocity;  
+    {
+        _rb.velocity = _velocity;
     }
 
     void Flip()
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
             vertical = -1.0f;
             auxMov = new Vector3(pos.x - 0.05f, pos.y);
             transform.position = auxMov;
-            
+
             r = false;
             d = true;
         }
@@ -91,7 +93,7 @@ public class Enemy : MonoBehaviour
             vertical = 0.0f;
             auxMov = new Vector3(pos.x, pos.y + 0.05f);
             transform.position = auxMov;
-            
+
             d = false;
             l = true;
         }
@@ -102,7 +104,7 @@ public class Enemy : MonoBehaviour
             vertical = 1.0f;
             auxMov = new Vector3(pos.x + 0.05f, pos.y);
             transform.position = auxMov;
-            
+
             l = false;
             u = true;
         }
@@ -113,10 +115,27 @@ public class Enemy : MonoBehaviour
             vertical = 0.0f;
             auxMov = new Vector3(pos.x, pos.y - 0.05f);
             transform.position = auxMov;
-            
+
             u = false;
             r = true;
         }
         mustPatrol = true;
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            audioManager.seleccionAudio(5, 1);
+            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
+            GameManager.Instance.GameOver();
+
+
+        }
+
+    }
+
+
+
 }

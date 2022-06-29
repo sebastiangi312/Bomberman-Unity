@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: 3
-  player: {fileID: 766632644995397802, guid: d445dd1412298424897be28872fec04c, type: 3}
+  player: {fileID: 7742448943852676358, guid: d445dd1412298424897be28872fec04c, type: 3}
 --- !u!58 &5594376098586332640
 CircleCollider2D:
   m_ObjectHideFlags: 0

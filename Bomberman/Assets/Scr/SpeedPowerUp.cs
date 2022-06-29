@@ -13,6 +13,7 @@ namespace Scr
         private bool _isPicked;
         
         private Collider2D collider2D;
+        private AudioManager audioManager;
         
         private GameObject player;
         void Start()
@@ -21,6 +22,7 @@ namespace Scr
             _isPicked =  false;
             collider2D = GetComponent<BoxCollider2D>();
             player = GameObject.Find("Bomberman");
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         // Update is called once per frame
@@ -40,6 +42,7 @@ namespace Scr
         {
             if (other.gameObject.tag == "Player")
             {
+                audioManager.seleccionAudio(3,1);
                 _isPicked = true;
                 var vel = player.GetComponent<Bomberman>().GetSpeed();
                 player.GetComponent<Bomberman>().SetSpeed(vel+velBuff);

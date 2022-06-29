@@ -14,12 +14,14 @@ public class Bomb : MonoBehaviour
     private MapDestroyer map;
     private Collider2D circleCollider;
 
+    
     // Update is called once per frame
 
     private void Start() {
         map = FindObjectOfType<MapDestroyer>();
         circleCollider = GetComponent<CircleCollider2D>();
         player = FindObjectOfType<Bomberman>();
+        
     }
     void Update()
     {
