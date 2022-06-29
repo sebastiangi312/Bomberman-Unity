@@ -41,12 +41,10 @@ public class Explosion : MonoBehaviour
             }
             else{
                 audioManager.seleccionAudio(1,1);
+                player.enemyDestroyed(other.gameObject);
             }
             other.gameObject.SetActive(false);
             Destroy(other);
-            player.enemyDestroyed();
-
-            
         }
     }
 }

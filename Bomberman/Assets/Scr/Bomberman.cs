@@ -12,7 +12,6 @@ public class Bomberman : MonoBehaviour
 
     private Vector2 _velocity;
 
-
     [SerializeField]
     private Rigidbody2D _rb;
 
@@ -34,10 +33,9 @@ public class Bomberman : MonoBehaviour
     private float timePowerBomb = 10f;
     private float auxTimePowerBomb;
     private AudioManager audioManager;
-
-    private int enemyDestroy;
-
+    
     private int cantidadEnemy;
+    private HashSet<int> enemyDestroy = new HashSet<int>();
 
 
 
@@ -49,7 +47,6 @@ public class Bomberman : MonoBehaviour
         powerBomb = false;
         auxTimePowerBomb = timePowerBomb;
         audioManager = FindObjectOfType<AudioManager>();
-        enemyDestroy = 0;
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
         foreach (GameObject go in allObjects)
@@ -107,7 +104,7 @@ public class Bomberman : MonoBehaviour
             }
         }
 
-        if (enemyDestroy == cantidadEnemy)
+        if (enemyDestroy.Count == cantidadEnemy)
         {
             audioManager.seleccionAudio(7, 1);
             gameObject.SetActive(false);
@@ -144,9 +141,9 @@ public class Bomberman : MonoBehaviour
         return powerBomb;
     }
 
-    public void enemyDestroyed()
+    public void enemyDestroyed(GameObject go)
     {
-        enemyDestroy++;
+         enemyDestroy.Add(go.GetInstanceID());
     }
 
 }
