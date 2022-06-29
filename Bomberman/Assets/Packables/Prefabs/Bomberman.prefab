@@ -143,14 +143,14 @@ GameObject:
   - component: {fileID: 4204414007083155758}
   - component: {fileID: 4204414007083155757}
   - component: {fileID: 4204414007083155756}
-  - component: {fileID: 4204414007083155747}
+  - component: {fileID: 7742448943852676358}
   m_Layer: 0
   m_Name: Bomberman
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4204414007083155758
 Transform:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.18839571}
   m_Size: {x: 0.5, y: 0.7053839}
   m_Direction: 0
---- !u!114 &4204414007083155747
+--- !u!114 &7742448943852676358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,10 +213,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4204414007083155746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fa83fa2d8f15446aeb8f044a6c5436, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ded34be75d8e542bf5efa1731340a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 2
   _velocity: {x: 0, y: 0}
   _rb: {fileID: 4204414007083155757}
   _bombPrefab: {fileID: 5267628937391067, guid: 3f5a2a3384c4f3848bd8c79522282628, type: 3}
@@ -224,3 +224,4 @@ MonoBehaviour:
   _animator: {fileID: 4204414006872134344}
   timeSpawnBomb: 1
   timePowerBomb: 10
+  cantidadEnemy: 7

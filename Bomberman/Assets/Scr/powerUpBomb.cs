@@ -8,10 +8,12 @@ public class powerUpBomb : MonoBehaviour
 
     private Collider2D circleCollider;
     private Bomberman player;
+    private AudioManager audioManager;
     void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
         player = FindObjectOfType<Bomberman>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class powerUpBomb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player"){
+            audioManager.seleccionAudio(2,1);
             player.activaPowerUpBomb();
             Destroy(gameObject);
         }

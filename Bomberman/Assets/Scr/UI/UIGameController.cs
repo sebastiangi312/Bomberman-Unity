@@ -13,12 +13,17 @@ public class UIGameController : MonoBehaviour
     private GameObject _endScreen;
     [SerializeField]
     private GameObject _player;
+    private AudioManager audioManager;
     
     void Start()
     {
+        
         GameEvents.OnStartScreenEvent += OnStartScreen;
         GameEvents.OnStartGameEvent += OnStartGame;
         GameEvents.OnGameOverEvent += OnGameOver;
+        audioManager = FindObjectOfType<AudioManager>();
+        _player.SetActive(false);
+        
     }
 
     private void OnDestroy()
@@ -30,13 +35,14 @@ public class UIGameController : MonoBehaviour
 
     private void OnStartScreen()
     {
+        
         _endScreen.SetActive(false);
         _startScreen.SetActive(true);
     }
 
     private void OnStartGame()
     {
-        
+        audioManager.seleccionAudio(6,1);
         _player.SetActive(true);
         _startScreen.SetActive(false);
     }
@@ -49,16 +55,19 @@ public class UIGameController : MonoBehaviour
     }
 
     private void OnGameOver(){
+        
         _startScreen.SetActive(false);
         _endScreen.SetActive(true);
     }
-    
+   
     public void ButtonBack()
     {
         SceneManager.LoadScene("SampleScene");
+        
     }
 
     public void CloseGame(){
+        audioManager.seleccionAudio(6,1);
         Application.Quit();
     }
 }
