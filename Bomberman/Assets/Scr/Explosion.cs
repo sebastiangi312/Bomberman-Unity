@@ -7,7 +7,7 @@ public class Explosion : MonoBehaviour
     // Start is called before the first frame update
 
     private float countdown = 1f;
-
+    private AudioManager audioManager;
     
 
     private Collider2D circleCollider;
@@ -15,6 +15,8 @@ public class Explosion : MonoBehaviour
     void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.seleccionAudio(0,.5f);
     }
 
     // Update is called once per frame
@@ -28,9 +30,17 @@ public class Explosion : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"){
+            if (other.gameObject.tag == "Player"){
+                audioManager.seleccionAudio(5,1);
+            }
+            else{
+                audioManager.seleccionAudio(1,1);
+            }
             other.gameObject.SetActive(false);
             Destroy(other);
+           
+
         }
     }
 }

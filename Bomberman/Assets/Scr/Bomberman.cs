@@ -33,6 +33,7 @@ public class Bomberman : MonoBehaviour
     [SerializeField]
     private float timePowerBomb = 10f;
     private float auxTimePowerBomb;
+    private AudioManager audioManager;
 
 
 
@@ -43,6 +44,7 @@ public class Bomberman : MonoBehaviour
         timeSpawnBomb = 0f;
         powerBomb = false;
         auxTimePowerBomb = timePowerBomb;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -72,6 +74,7 @@ public class Bomberman : MonoBehaviour
 
             if (timeSpawnBomb <= 0)
             {
+                audioManager.seleccionAudio(4,1);
                 GameObject projectile = Instantiate(_bombPrefab);
                 projectile.transform.position = _bombPoint.position;
                 projectile.transform.rotation = _bombPoint.rotation;
