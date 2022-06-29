@@ -6,20 +6,16 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float speed = 1;
-
     [HideInInspector]
     public bool mustPatrol;
-
     [SerializeField]
     private Rigidbody2D _rb;
-
     public float walkSpeed;
-
     public Collider2D bodyCollider;
-
     public LayerMask groundLayer;
     [SerializeField]
     private Animator _animator;
+    public Animator Animator => _animator;
     private Vector2 _velocity;
     private AudioManager audioManager;
     private bool r;
@@ -130,12 +126,6 @@ public class Enemy : MonoBehaviour
             other.gameObject.SetActive(false);
             Destroy(other.gameObject);
             GameManager.Instance.GameOver();
-
-
         }
-
     }
-
-
-
 }

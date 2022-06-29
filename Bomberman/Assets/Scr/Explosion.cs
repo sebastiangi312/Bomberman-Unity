@@ -37,11 +37,13 @@ public class Explosion : MonoBehaviour
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"){
             if (other.gameObject.tag == "Player"){
                 audioManager.seleccionAudio(5,1);
+				player.Animator.SetTrigger("IsDeathing");
                 GameManager.Instance.GameOver();
             }
             else{
                 audioManager.seleccionAudio(1,1);
                 player.enemyDestroyed(other.gameObject);
+				// other.gameObject.Animator.SerTrigger("IsDeathing");
             }
             other.gameObject.SetActive(false);
             Destroy(other);

@@ -224,4 +224,3 @@ MonoBehaviour:
   _animator: {fileID: 4204414006872134344}
   timeSpawnBomb: 1
   timePowerBomb: 10
-  cantidadEnemy: 7
