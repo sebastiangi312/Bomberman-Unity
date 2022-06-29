@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
         horizontal = 1.0f;
         mustPatrol = true;
         r = true; // Inicia moviendose a la derecha
+        _animator.SetTrigger("IsMovRight");
         l = false;
         d = false;
         u = false;
@@ -53,12 +54,13 @@ public class Enemy : MonoBehaviour
 
         if(bodyCollider.IsTouchingLayers(groundLayer))
         {
+            Debug.Log("Colision");
             Flip();
         }
-        
         Vector2 _dir  = new Vector2(horizontal, vertical);
         _dir.Normalize();
         _velocity = speed * _dir;
+        
     }
     
     private void FixedUpdate()
@@ -76,7 +78,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovDown");
             horizontal = 0.0f;
             vertical = -1.0f;
-            auxMov = new Vector3(transform.position.x - 0.05f, transform.position.y);
+            auxMov = new Vector3(pos.x - 0.05f, pos.y);
             transform.position = auxMov;
             
             r = false;
@@ -87,7 +89,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovLeft");
             horizontal = -1.0f;
             vertical = 0.0f;
-            auxMov = new Vector3(transform.position.x, transform.position.y + 0.05f);
+            auxMov = new Vector3(pos.x, pos.y + 0.05f);
             transform.position = auxMov;
             
             d = false;
@@ -98,7 +100,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovUp");
             horizontal = 0.0f;
             vertical = 1.0f;
-            auxMov = new Vector3(transform.position.x + 0.05f, transform.position.y);
+            auxMov = new Vector3(pos.x + 0.05f, pos.y);
             transform.position = auxMov;
             
             l = false;
@@ -109,7 +111,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("IsMovRight");
             horizontal = 1.0f;
             vertical = 0.0f;
-            auxMov = new Vector3(transform.position.x, transform.position.y - 0.05f);
+            auxMov = new Vector3(pos.x, pos.y - 0.05f);
             transform.position = auxMov;
             
             u = false;

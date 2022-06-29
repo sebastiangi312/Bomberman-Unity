@@ -69,7 +69,6 @@ public class Bomberman : MonoBehaviour
         timeSpawnBomb -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
-
             if (timeSpawnBomb <= 0)
             {
                 GameObject projectile = Instantiate(_bombPrefab);
@@ -77,7 +76,6 @@ public class Bomberman : MonoBehaviour
                 projectile.transform.rotation = _bombPoint.rotation;
                 timeSpawnBomb = timeSpawnBombAux;
             }
-
 
         }
         if (powerBomb){
