@@ -31,7 +31,7 @@ public class Explosion : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             other.gameObject.SetActive(false);
             Destroy(other);
-        GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver();
         }
     }
 }

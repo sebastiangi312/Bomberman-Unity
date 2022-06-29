@@ -111,9 +111,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766632644995397807}
-  - component: {fileID: 766632644995397800}
   - component: {fileID: 766632644995397805}
   - component: {fileID: 766632644995397806}
+  - component: {fileID: 8993342621499794037}
   m_Layer: 0
   m_Name: Bomberman
   m_TagString: Player
@@ -137,24 +137,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.001, z: 0.409}
---- !u!114 &766632644995397800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766632644995397802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ded34be75d8e542bf5efa1731340a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  _velocity: {x: 0, y: 0}
-  _rb: {fileID: 766632644995397805}
-  _bombPrefab: {fileID: 5267628937391067, guid: 3f5a2a3384c4f3848bd8c79522282628, type: 3}
-  _bombPoint: {fileID: 766632645056654022}
-  _animator: {fileID: 766632644625804092}
 --- !u!50 &766632644995397805
 Rigidbody2D:
   serializedVersion: 4
@@ -192,6 +174,26 @@ CapsuleCollider2D:
   m_Offset: {x: -0.02295136, y: -0.1535821}
   m_Size: {x: 0.5198944, y: 0.79403985}
   m_Direction: 0
+--- !u!114 &8993342621499794037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766632644995397802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fa83fa2d8f15446aeb8f044a6c5436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 1
+  _velocity: {x: 0, y: 0}
+  _rb: {fileID: 766632644995397805}
+  _bombPrefab: {fileID: 5267628937391067, guid: 3f5a2a3384c4f3848bd8c79522282628, type: 3}
+  _bombPoint: {fileID: 766632645056654022}
+  _animator: {fileID: 766632644625804092}
+  timeSpawnBomb: 1
+  timePowerBomb: 10
 --- !u!1 &766632645056654023
 GameObject:
   m_ObjectHideFlags: 0
