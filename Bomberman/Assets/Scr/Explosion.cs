@@ -11,12 +11,16 @@ public class Explosion : MonoBehaviour
     
 
     private Collider2D circleCollider;
+    [SerializeField]
+    private Bomberman player;
     
     void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
         audioManager = FindObjectOfType<AudioManager>();
+        player = FindObjectOfType<Bomberman>();
         audioManager.seleccionAudio(0,.5f);
+        
     }
 
     // Update is called once per frame
@@ -33,14 +37,16 @@ public class Explosion : MonoBehaviour
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"){
             if (other.gameObject.tag == "Player"){
                 audioManager.seleccionAudio(5,1);
+                GameManager.Instance.GameOver();
             }
             else{
                 audioManager.seleccionAudio(1,1);
             }
             other.gameObject.SetActive(false);
             Destroy(other);
-           
+            player.enemyDestroyed();
 
+            
         }
     }
 }

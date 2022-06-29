@@ -127,6 +127,8 @@ public class Enemy : MonoBehaviour
             audioManager.seleccionAudio(5, 1);
             other.gameObject.SetActive(false);
             Destroy(other.gameObject);
+            GameManager.Instance.GameOver();
+
 
         }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4629478304152821714}
   - component: {fileID: -506391177327665244}
   - component: {fileID: 5594376098586332640}
+  - component: {fileID: -1749948405234912326}
   m_Layer: 0
   m_Name: BombPrefab
   m_TagString: Untagged
@@ -97,8 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: 3
-  player: {fileID: 766632644995397802, guid: d445dd1412298424897be28872fec04c, type: 3}
-  map: {fileID: 0}
+  player: {fileID: 7742448943852676358, guid: d445dd1412298424897be28872fec04c, type: 3}
 --- !u!58 &5594376098586332640
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,3 +115,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.24
+--- !u!95 &-1749948405234912326
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5267628937391067}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6ef3b3516bcf11741bc7b84a643f54cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
