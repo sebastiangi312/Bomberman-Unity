@@ -15,6 +15,8 @@ public class MapDestroyer : MonoBehaviour
     private GameObject explosionPrefab;
     [SerializeField]
     private GameObject speedPowerUpPrefab;
+    [SerializeField]
+    private GameObject bombPowerUpPrefab;
 
     public void Explosion(Vector2 worldPos, bool power){
         Vector3Int originCell = tilemap.WorldToCell(worldPos);
@@ -50,7 +52,6 @@ public class MapDestroyer : MonoBehaviour
         Debug.Log(tile + " - " + explodableBlock);
         Debug.Log(tile == explodableBlock);
        
-        Vector3 pos = tilemap.GetCellCenterWorld(cell);
         if (tile == solidBlock){
             Debug.Log("Solid");
             return false;
@@ -60,6 +61,7 @@ public class MapDestroyer : MonoBehaviour
             tilemap.SetTile(cell,null);
             Vector3 pos = tilemap.GetCellCenterWorld(cell);
             Instantiate(explosionPrefab,pos,Quaternion.identity);
+            CreatePowerUp(pos);
             return false;
 
         }
@@ -69,18 +71,19 @@ public class MapDestroyer : MonoBehaviour
             Instantiate(explosionPrefab,pos,Quaternion.identity);
             return true;
         }
-        Instantiate(explosionPrefab, pos, Quaternion.identity);
-        return true;
 
     }
 
-    private void createPowerUp(Vector3Int pos)
+    private void CreatePowerUp(Vector3 pos)
     {
-        float random = Random.value;
-        if (random <= 0.5)
+        float randomPowerUp = Random.value;
+        if (randomPowerUp <= 0.4)
         {
-            Vector3 newPosi = tilemap.GetCellCenterWorld(pos);
-            Instantiate(speedPowerUpPrefab, newPosi, Quaternion.identity);
+            float choosePowerUp = Random.value;
+            if (choosePowerUp <= 0.5)
+                Instantiate(speedPowerUpPrefab, pos, Quaternion.identity);
+            else
+                Instantiate(bombPowerUpPrefab, pos, Quaternion.identity);
         }
     }
 }
