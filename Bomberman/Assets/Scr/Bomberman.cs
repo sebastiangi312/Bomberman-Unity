@@ -9,35 +9,26 @@ public class Bomberman : MonoBehaviour
     [SerializeField]
     private float _speed = 1;
     [SerializeField]
-
     private Vector2 _velocity;
-
     [SerializeField]
     private Rigidbody2D _rb;
-
     [SerializeField]
     private GameObject _bombPrefab;
-
     [SerializeField]
     private Transform _bombPoint;
-
     [SerializeField]
     private Animator _animator;
-
     [SerializeField]
     private float timeSpawnBomb = 1f;
     private float timeSpawnBombAux;
-
     private bool powerBomb;
     [SerializeField]
     private float timePowerBomb = 10f;
     private float auxTimePowerBomb;
     private AudioManager audioManager;
-    
     private int cantidadEnemy;
     private HashSet<int> enemyDestroy = new HashSet<int>();
-
-
+    public Animator Animator => _animator;
 
     void Start()
     {
@@ -82,7 +73,6 @@ public class Bomberman : MonoBehaviour
         timeSpawnBomb -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
-
             if (timeSpawnBomb <= 0)
             {
                 audioManager.seleccionAudio(4, 1);
@@ -91,7 +81,6 @@ public class Bomberman : MonoBehaviour
                 projectile.transform.rotation = _bombPoint.rotation;
                 timeSpawnBomb = timeSpawnBombAux;
             }
-
 
         }
         if (powerBomb)
