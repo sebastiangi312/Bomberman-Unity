@@ -51,7 +51,6 @@ public class Bomberman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(cantidadEnemy);
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 

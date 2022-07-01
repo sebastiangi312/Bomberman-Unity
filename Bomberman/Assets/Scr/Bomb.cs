@@ -21,7 +21,6 @@ public class Bomb : MonoBehaviour
         map = FindObjectOfType<MapDestroyer>();
         circleCollider = GetComponent<CircleCollider2D>();
         player = FindObjectOfType<Bomberman>();
-        
     }
     void Update()
     {
