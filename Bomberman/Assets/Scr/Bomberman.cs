@@ -154,6 +154,6 @@ public class Bomberman : MonoBehaviour
         imDead = true;
         _animator.SetTrigger("IsDeathing");
         audioManager.seleccionAudio(5,1);
-        //GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 }
