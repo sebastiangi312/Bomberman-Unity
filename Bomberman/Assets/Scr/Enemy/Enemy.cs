@@ -26,23 +26,25 @@ public class Enemy : MonoBehaviour
     public void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        // Inicia intentando movimiento hacia la derecha
-        lastPos = 0;
-        _animator.SetTrigger("IsMovRight");
         startTime = Time.time;
         currentGrid = nextGrid = tilemap.WorldToCell(transform.position);
         
         if(CanMove())
         {
+            lastPos = -1;
             GetNextGrid();
             totalDistance = Vector3.Distance(currentGrid, nextGrid);
         }
+        else
+            _animator.SetBool("IsNotMoving", true);
     }
 
     void Update()
     {
         if (CanMove())
             Move();
+        else
+            _animator.SetBool("IsNotMoving", true);
     }
     
     private bool CanMove()
@@ -62,16 +64,16 @@ public class Enemy : MonoBehaviour
         points.Add(currentGrid);
         points.Add(currentGrid);
         points.Add(currentGrid);
+        int availablePoints = 0;
+        availablePoints += CheckAvailableDirection(new Vector3Int(1,0,0), 0) + // Derecha
+                           CheckAvailableDirection(new Vector3Int(0,-1,0), 1) + // Abajo
+                           CheckAvailableDirection(new Vector3Int(-1,0,0), 2) + // Izquierda
+                           CheckAvailableDirection(new Vector3Int(0,1,0), 3); // Arriba
         
-        CheckAvailableDirection(new Vector3Int(1,0,0), 0); // Derecha
-        CheckAvailableDirection(new Vector3Int(0,-1,0), 1); // Abajo
-        CheckAvailableDirection(new Vector3Int(-1,0,0), 2); // Izquierda
-        CheckAvailableDirection(new Vector3Int(0,1,0), 3); // Arriba
-        
-        return points.Count > 0;
+        return availablePoints > 0;
     }
     
-    private void CheckAvailableDirection(Vector3Int direction, int pos)
+    private int CheckAvailableDirection(Vector3Int direction, int pos)
     {
         Vector3Int cell = tilemap.WorldToCell(transform.position) + direction;
         Tile tile = tilemap.GetTile<Tile>(cell);
@@ -79,11 +81,9 @@ public class Enemy : MonoBehaviour
         if (tile != solidBlock && tile != explodableBlock /*|| Bomb*/)
         {
             points[pos] = cell;
+            return 1;
         }
-        else
-        {
-            points[pos] = currentGrid;
-        }
+        return 0;
     }
 
     private void Move()
@@ -113,8 +113,9 @@ public class Enemy : MonoBehaviour
 
     private void GetNextGrid()
     {
-        pos = lastPos; // inicia intentando moverse en la dirección
-                       // en la que venía moviendose
+        if (lastPos == -1) pos = 0;
+        else pos = lastPos;  // inicia intentando moverse en la dirección
+                             // en la que venía moviendose
         while (points[pos] == currentGrid)
         {
             pos++;
@@ -122,8 +123,9 @@ public class Enemy : MonoBehaviour
         }
         nextGrid = points[pos];
         
-        if (pos != lastPos) // Si la dirección del movimiento cambia,
-                            // también cambia la animación
+        if (pos != lastPos || lastPos == -1) // Si la dirección del movimiento cambia
+                                             // o si es la primera vez que se ejecuta,
+                                             // también cambia la animación
             ChangeAnimation();
     }
 
