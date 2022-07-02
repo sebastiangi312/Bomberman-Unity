@@ -18,12 +18,17 @@ public class Enemy : MonoBehaviour
     public Animator Animator => _animator;
     private Vector2 _velocity;
     private AudioManager audioManager;
+    [SerializeField]
+    private Bomberman player;
     private bool r;
     private bool l;
     private bool u;
     private bool d;
     private float vertical;
     private float horizontal;
+
+    private bool imDead = false;
+    private float timeDead = 1f;
 
     public void Start()
     {
@@ -36,6 +41,7 @@ public class Enemy : MonoBehaviour
         d = false;
         u = false;
         audioManager = FindObjectOfType<AudioManager>();
+
     }
 
     void Update()
@@ -43,6 +49,15 @@ public class Enemy : MonoBehaviour
         if (mustPatrol)
         {
             Patrol();
+        }
+
+        if (imDead)
+        {
+            timeDead -= Time.deltaTime;
+        }
+        if (timeDead <= 0)
+        {
+            Destroy(gameObject);
         }
 
     }
@@ -55,10 +70,10 @@ public class Enemy : MonoBehaviour
             Debug.Log("Colision");
             Flip();
         }
-        Vector2 _dir  = new Vector2(horizontal, vertical);
+        Vector2 _dir = new Vector2(horizontal, vertical);
         _dir.Normalize();
         _velocity = speed * _dir;
-        
+
     }
 
     private void FixedUpdate()
@@ -121,11 +136,17 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
+
         {
-            audioManager.seleccionAudio(5, 1);
-            other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
-            GameManager.Instance.GameOver();
+            other.gameObject.GetComponent<Bomberman>().bombermanDead();
         }
+    }
+
+    public void enemyDead()
+    {
+        imDead = true;
+        audioManager.seleccionAudio(1, 1);
+        _animator.SetTrigger("IsDeathing");
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 }

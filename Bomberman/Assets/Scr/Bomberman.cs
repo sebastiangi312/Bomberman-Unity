@@ -30,6 +30,9 @@ public class Bomberman : MonoBehaviour
     private HashSet<int> enemyDestroy = new HashSet<int>();
     public Animator Animator => _animator;
 
+    private bool imDead = false;
+    private float timeGameOver = 1f;
+
     void Start()
     {
         // _animator = GetComponents<Animator>();
@@ -100,6 +103,15 @@ public class Bomberman : MonoBehaviour
             GameManager.Instance.GameOver();
         }
 
+        if (imDead){
+            timeGameOver -= Time.deltaTime;
+        }
+
+        if (timeGameOver <= 0){
+            GameManager.Instance.GameOver();
+
+        }
+
     }
 
     public void SetSpeed(float speed)
@@ -135,4 +147,10 @@ public class Bomberman : MonoBehaviour
          enemyDestroy.Add(go.GetInstanceID());
     }
 
+    public void bombermanDead(){
+        imDead = true;
+        _animator.SetTrigger("IsDeathing");
+        audioManager.seleccionAudio(5,1);
+        //GetComponent<CapsuleCollider2D>().enabled = false;
+    }
 }
