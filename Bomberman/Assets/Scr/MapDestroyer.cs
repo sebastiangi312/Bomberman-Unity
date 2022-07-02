@@ -49,15 +49,11 @@ public class MapDestroyer : MonoBehaviour
     public bool ExplosionCell (Vector3Int cell){
         
         Tile tile = tilemap.GetTile<Tile>(cell);
-        Debug.Log(tile + " - " + explodableBlock);
-        Debug.Log(tile == explodableBlock);
        
         if (tile == solidBlock){
-            Debug.Log("Solid");
             return false;
         }
         if (tile == explodableBlock){
-            Debug.Log("No Solid");
             tilemap.SetTile(cell,null);
             Vector3 pos = tilemap.GetCellCenterWorld(cell);
             Instantiate(explosionPrefab,pos,Quaternion.identity);
