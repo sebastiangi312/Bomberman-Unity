@@ -113,7 +113,6 @@ public class Enemy : MonoBehaviour
         }
         Vector2 _dir = new Vector2(horizontal, vertical);
         _dir.Normalize();
-        _velocity = speed * _dir;
 
         return availablePoints > 0;
     }
