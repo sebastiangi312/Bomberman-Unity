@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.Serialization;
 
 public class Bomberman : MonoBehaviour
@@ -20,6 +21,8 @@ public class Bomberman : MonoBehaviour
     private Animator _animator;
     [SerializeField]
     private float timeSpawnBomb = 1f;
+    [SerializeField]
+    private Tilemap tilemap;
     private float timeSpawnBombAux;
     private bool powerBomb;
     [SerializeField]
@@ -76,11 +79,12 @@ public class Bomberman : MonoBehaviour
             {
                 audioManager.seleccionAudio(4, 1);
                 GameObject projectile = Instantiate(_bombPrefab);
-                projectile.transform.position = _bombPoint.position;
+                Vector3 movAux = new Vector3(0.5f, 0.5f, 0.0f);
+                Vector3 pos = tilemap.WorldToCell(_bombPoint.position) + movAux;
+                projectile.transform.position = pos;
                 projectile.transform.rotation = _bombPoint.rotation;
                 timeSpawnBomb = timeSpawnBombAux;
             }
-
         }
         if (powerBomb)
         {

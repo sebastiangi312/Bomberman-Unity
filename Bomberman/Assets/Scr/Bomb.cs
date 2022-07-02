@@ -9,14 +9,11 @@ public class Bomb : MonoBehaviour
     private float countdown = 3f;
     [SerializeField]
     private Bomberman player;
-
-    
     private MapDestroyer map;
     private Collider2D circleCollider;
 
     
     // Update is called once per frame
-
     private void Start() {
         map = FindObjectOfType<MapDestroyer>();
         circleCollider = GetComponent<CircleCollider2D>();
@@ -26,10 +23,8 @@ public class Bomb : MonoBehaviour
     {
         countdown -= Time.deltaTime;
         if (countdown <= 0){
-            Debug.Log("Exploción");
             map.Explosion(transform.position, player.getPowerBomb());
             Destroy(gameObject);
-
         }
     }
 

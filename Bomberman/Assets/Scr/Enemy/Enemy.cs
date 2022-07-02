@@ -15,39 +15,53 @@ public class Enemy : MonoBehaviour
     private Tile explodableBlock;
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private Rigidbody2D _rb;
     public Animator Animator => _animator;
     private AudioManager audioManager;
     private float currentTime, startTime, totalDistance;
     private List<Vector3Int> points;
+    private bool isMoving;
     private int lastPos, pos;
     private Vector3Int currentGrid, nextGrid;
     private Vector3 auxMov = new Vector3(0.5f, 0.5f, 0.0f);
-
     public void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         startTime = Time.time;
         currentGrid = nextGrid = tilemap.WorldToCell(transform.position);
         
-        if(CanMove())
+        if(CanMove(false))
         {
+            isMoving = true;
             lastPos = -1;
             GetNextGrid();
             totalDistance = Vector3.Distance(currentGrid, nextGrid);
         }
         else
+        {
+            isMoving = false;
             _animator.SetBool("IsNotMoving", true);
+        }
     }
 
     void Update()
     {
-        if (CanMove())
+        if (isMoving)
             Move();
         else
-            _animator.SetBool("IsNotMoving", true);
+        {
+            if (CanMove(false))
+            {
+                isMoving = true;
+                lastPos = -1;
+                GetNextGrid();
+                totalDistance = Vector3.Distance(currentGrid, nextGrid);
+            }
+        }
     }
     
-    private bool CanMove()
+    private bool CanMove(bool bomb)
     {
         points = new List<Vector3Int>();
         /*
@@ -69,7 +83,11 @@ public class Enemy : MonoBehaviour
                            CheckAvailableDirection(new Vector3Int(0,-1,0), 1) + // Abajo
                            CheckAvailableDirection(new Vector3Int(-1,0,0), 2) + // Izquierda
                            CheckAvailableDirection(new Vector3Int(0,1,0), 3); // Arriba
-        
+        if (bomb)
+        {
+            availablePoints--;
+            points[lastPos] = currentGrid;
+        }
         return availablePoints > 0;
     }
     
@@ -78,7 +96,7 @@ public class Enemy : MonoBehaviour
         Vector3Int cell = tilemap.WorldToCell(transform.position) + direction;
         Tile tile = tilemap.GetTile<Tile>(cell);
         
-        if (tile != solidBlock && tile != explodableBlock /*|| Bomb*/)
+        if (tile != solidBlock && tile != explodableBlock)
         {
             points[pos] = cell;
             return 1;
@@ -103,14 +121,18 @@ public class Enemy : MonoBehaviour
             startTime = Time.time;
             transform.position = (Vector3) nextGrid + auxMov;
             currentGrid = nextGrid;
-            if (CanMove())
+            if (CanMove(false))
             {
                 GetNextGrid();
                 totalDistance = Vector3.Distance(currentGrid, nextGrid);
             }
+            else
+            {
+                isMoving = false;
+                _animator.SetBool("IsNotMoving", true);
+            }
         }
     }
-
     private void GetNextGrid()
     {
         if (lastPos == -1) pos = 0;
@@ -118,8 +140,7 @@ public class Enemy : MonoBehaviour
                              // en la que venía moviendose
         while (points[pos] == currentGrid)
         {
-            pos++;
-            if (pos == points.Count) pos = 0;
+            pos = Random.Range(0, points.Count);
         }
         nextGrid = points[pos];
         
@@ -144,12 +165,28 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Player")
         {
             audioManager.seleccionAudio(5, 1);
             other.gameObject.SetActive(false);
             Destroy(other.gameObject);
             GameManager.Instance.GameOver();
+        }
+        else if (other.gameObject.tag == "Bomb")
+        {
+            currentGrid = tilemap.WorldToCell(transform.position);
+            if(CanMove(true))
+            {
+                isMoving = true;
+                GetNextGrid();
+                totalDistance = Vector3.Distance(currentGrid, nextGrid);
+            }
+            else
+            {
+                isMoving = false;
+                _animator.SetBool("IsNotMoving", true);   
+            }
         }
     }
 }
