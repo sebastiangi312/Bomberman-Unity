@@ -4,5 +4,7 @@ Proyecto para la materia Introduccion a  los videojuegos unal 2022-1,  Simulaci√
 ## Version: 
   2020.3.31f1
   
-##Paquetes extras:
+## Paquetes extras:
   Ninguno
+
+![e3752b1d-915e-4d65-bcce-51414391b0cc](https://user-images.githubusercontent.com/40746232/176985011-9feebc10-d00b-4fef-954a-69ef9824b6f5.jpg)
